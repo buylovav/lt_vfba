@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.7.2)
+project(lt_vfba)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+find_package(OpenCV REQUIRED)
+add_executable(lt_vfba main.cpp frames.cpp decoder.cpp analyzer.cpp)
+target_link_libraries(lt_vfba ${OpenCV_LIBS} pthread)
