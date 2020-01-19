@@ -25,7 +25,7 @@ private:
     std::unique_ptr<Decoder> _decoder;
     Frames _frames;
     
-    std::mutex _pm;
+    std::mutex _pm;//cout print mutex
     std::atomic<bool> _finished;
 };
 
