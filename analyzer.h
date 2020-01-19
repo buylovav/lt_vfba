@@ -15,7 +15,9 @@ public:
     void wait();
 private:
     void run();
+    void measure(cv::Mat&& frame);
     void print(const std::string& text);
+    void print(int min, double mean, int max);
     
     const std::string _file;   
     
