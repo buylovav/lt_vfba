@@ -10,7 +10,7 @@ public:
     ~Frames();
     
     void put(cv::Mat&& mat);
-    cv::Mat get();
+    std::pair<bool, cv::Mat> get(bool finished);
 private:
     std::deque<cv::Mat> _queue;
     std::mutex _m;
