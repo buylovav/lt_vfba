@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <iomanip>
+#include <opencv2/opencv.hpp>
 
 #include "analyzer.h"
 
@@ -54,13 +55,13 @@ void Analyzer::run()
     {
         thread_local int cnt;        
         
-        auto frame = _frames.get();        
-        if (!frame.empty()) //there is a frame
+        auto data = _frames.get(_finished);        
+        if (!data.second.empty()) //there is a frame
         {
-            measure(std::move(frame));
+            measure(std::move(data.second));
         }
         else //there is not
-            if (_finished)
+            if (data.first)
                 break;        
     }
     print("A thread has just finished its job");
@@ -69,7 +70,7 @@ void Analyzer::run()
 void Analyzer::measure(cv::Mat&& frame)
 {
     cv::Mat gray;
-    cv::cvtColor(frame, gray, CV_RGB2GRAY);
+    cv::cvtColor(frame, gray, cv::COLOR_RGB2GRAY);
     
     auto mean = cv::mean(gray);
     double min, max;
